@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuarios</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container mt-4">
+    <h3>Usuarios</h3>
+
+    <div th:if="${ok}" class="alert alert-success" th:text="${ok}"></div>
+
+    <div class="row">
+        <!-- Lista de usuarios en Cards: nombre, correo, descripción -->
+        <div class="col-md-4 mb-3" th:each="u : ${usuarios}">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 th:text="${u.nombre + ' ' + u.apellido}">Nombre Apellido</h5>
+                    <p class="mb-1"><b>Correo:</b> <span th:text="${u.correo}">correo</span></p>
+                    <p th:text="${u.descripcion}">Descripción...</p>
+
+                    <!-- Botón que lleva a Enviar Mensaje -->
+                    <a class="btn btn-primary btn-sm"
+                       th:href="@{/mensajes/nuevo(destinatarioId=${u.id})}">
+                        Enviar mensaje
+                    </a>
+                    <a class="btn btn-outline-secondary btn-sm ml-2"
+                       th:href="@{/mensajes/recibidos/{id}(id=${u.id})}">
+                        Ver recibidos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

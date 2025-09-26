@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Recibidos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container mt-4">
+    <h3>Bandeja de recibidos (<span th:text="${total}">0</span>)</h3>
+    <div class="list-group">
+        <div class="list-group-item" th:each="m : ${mensajes}">
+            <div><b>De:</b> <span th:text="${m.remitente.nombre + ' ' + m.remitente.apellido}"></span></div>
+
+            <div>
+                <b>Regalo:</b> <span th:text="${m.regaloTipo}"></span>
+                <!-- Si usas enum: th:if="${m.regaloTipo.name()=='Carrito'}" -->
+                <span th:if="${m.regaloTipo == 'Carrito'}"> | <b>Color:</b> <span th:text="${m.regaloColor}"></span></span>
+                <span th:if="${m.regaloTipo == 'Flor'}"> | Flor amarilla</span>
+            </div>
+
+            <div><b>Mensaje:</b> <span th:text="${m.contenido}"></span></div>
+            <small class="text-muted" th:text="${#temporals.format(m.fechaEnvio, 'dd/MM/yyyy HH:mm')}"></small>
+        </div>
+    </div>
+    <div class="mb-3">
+        <button type="button" class="btn btn-outline-secondary btn-sm"
+                onclick="if (document.referrer) { window.history.back(); } else { window.location.href='/home'; }">
+            ← Volver
+        </button>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

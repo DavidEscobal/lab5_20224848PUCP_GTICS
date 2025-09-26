@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de usuarios</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container mt-4">
+    <h3>Registro de Usuarios</h3>
+
+    <form th:action="@{/usuarios/registro}" th:object="${usuario}" method="post" novalidate>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Nombre</label>
+                <input th:field="*{nombre}" class="form-control" placeholder="Ej. Ana">
+                <div class="text-danger" th:errors="*{nombre}"></div>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Apellido</label>
+                <input th:field="*{apellido}" class="form-control" placeholder="Ej. López">
+                <div class="text-danger" th:errors="*{apellido}"></div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Correo</label>
+            <input th:field="*{correo}" class="form-control" placeholder="usuario@dominio.com">
+            <small class="form-text text-muted">Se valida con REGEX.</small>
+            <div class="text-danger" th:errors="*{correo}"></div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label>Edad</label>
+                <input type="number" th:field="*{edad}" class="form-control" min="18">
+                <div class="text-danger" th:errors="*{edad}"></div>
+            </div>
+            <div class="form-group col-md-8">
+                <label>Contraseña</label>
+                <input type="password" th:field="*{contrasena}" class="form-control" placeholder="mín. 6, con 1 número">
+                <div class="text-danger" th:errors="*{contrasena}"></div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Descripción</label>
+            <textarea th:field="*{descripcion}" class="form-control" rows="3"
+                      placeholder="(opcional) si escribes, mínimo 10 caracteres"></textarea>
+            <div class="text-danger" th:errors="*{descripcion}"></div>
+        </div>
+
+        <button class="btn btn-success">Registrar</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
