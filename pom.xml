@@ -75,6 +75,8 @@
         </dependency>
     </dependencies>
 
+    <packaging>jar</packaging>
+
     <build>
         <plugins>
             <plugin>
@@ -83,5 +85,8 @@
             </plugin>
         </plugins>
     </build>
+
+
+
 
 </project>
